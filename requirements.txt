@@ -1,0 +1,8 @@
+anthropic
+fastapi
+httpx
+pydantic-settings
+python-multipart
+twilio
+uvicorn[standard]
+websockets
