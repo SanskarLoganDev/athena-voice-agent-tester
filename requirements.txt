@@ -1,8 +1,10 @@
 anthropic
 fastapi
 httpx
-pydantic-settings
+pydantic
+pytest
 python-multipart
 twilio
 uvicorn[standard]
 websockets
+pydantic-settings
