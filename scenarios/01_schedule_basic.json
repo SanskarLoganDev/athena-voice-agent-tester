@@ -1,4 +1,36 @@
 {
-  "id": "schedule_basic",
-  "title": "Simple appointment scheduling"
+  "id": "01_schedule_basic",
+  "title": "Simple appointment scheduling",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "November 4th, 2000",
+    "phone": "2408986857"
+  },
+  "goal": "Schedule a routine follow-up appointment for sometime next week, preferably a weekday morning.",
+  "opening_line": "Hi, I'd like to schedule an appointment please.",
+  "must_test": [
+    "Whether the agent can successfully schedule a new appointment",
+    "Whether the agent asks for patient name and date of birth",
+    "Whether the agent confirms the appointment details before ending the call",
+    "Whether the agent offers specific available time slots"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should greet the patient and ask how it can help",
+    "Agent should collect name and date of birth to identify the patient",
+    "Agent should offer available appointment slots",
+    "Agent should confirm the scheduled date and time clearly before ending"
+  ],
+  "completion_signals": [
+    "appointment confirmed",
+    "appointment scheduled",
+    "you're all set",
+    "see you then",
+    "we'll see you"
+  ],
+  "escalation_steps": [
+    "If the agent does not offer times, ask: what times are available next week?",
+    "If the agent asks for more information, provide name and date of birth",
+    "If the agent confirms an appointment, ask it to repeat the date and time"
+  ],
+  "max_turns": 14
 }
