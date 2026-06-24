@@ -1,0 +1,48 @@
+{
+  "id": "12_multi_intent",
+  "title": "Three things at once: reschedule, two refills, insurance update",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "July 4th, 2000",
+    "phone": "4246889033"
+  },
+  "goal": "Patient opens the call with three separate requests: reschedule an appointment, refills on two medications, and an insurance update. Evaluate whether Athena tracks and completes all three items without dropping any, and whether she treats the two medication refills as separate requests.",
+  "opening_line": "Hi, I need to do a few things today — I need to reschedule my upcoming appointment, get refills on two of my medications, and update my insurance information. Can we go through all of that?",
+  "must_test": [
+    "Whether Athena acknowledges all three items upfront or silently drops one or more",
+    "Whether Athena works through all three items before ending the call",
+    "Whether Athena confirms completion of each item before moving to the next",
+    "Whether Athena conflates the two separate medication refills into one",
+    "Whether Athena ends the call after item one or two without being prompted to continue"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should acknowledge all three requests before starting",
+    "Agent should work through each item in order and confirm each one before moving on",
+    "Agent should not end the call until all three items are resolved",
+    "Agent should treat the two medication refills as separate requests"
+  ],
+  "completion_signals": [
+    "is there anything else I can help",
+    "anything else for you today",
+    "take care",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena asks for identity, say: James Logan, July 4th 2000",
+    "If Athena asks which appointment to reschedule, say: my nearest upcoming one — move it to next Monday morning",
+    "If Athena asks for a reschedule reason, say: scheduling conflict",
+    "Once the reschedule is confirmed, say: great, I also need two prescription refills",
+    "If Athena asks which medication, say: naproxen 500 milligrams first",
+    "If Athena asks for a pharmacy, say: CVS on Route 1 in College Park",
+    "Once the first refill is submitted, say: I also need a refill on ibuprofen 400 milligrams, same pharmacy",
+    "Once both refills are submitted, say: and the last thing — I need to update my insurance to Aetna",
+    "If Athena asks for the member ID, say: AET dash 7 7 4 4 2 2 1, individual plan, Maryland",
+    "If Athena tries to end the call before all three tasks are done, say: we still have more to go through — and name the remaining items",
+    "Once all three are done, ask: can you quickly confirm all three things we just did?"
+  ],
+  "extra": {
+    "watch_for": "Most likely failure: Athena completes the reschedule and ends the call without acknowledging the refills or insurance. Second failure: she combines both refills into one request. The end-of-call summary request tests whether Athena can recall all three completed actions.",
+    "known_athena_behaviour": "From call-08inter-f30287, Athena handled reactive mid-call topic switches well. This scenario tests proactive multi-item agenda declared upfront, which is a different capability."
+  },
+  "max_turns": 24
+}

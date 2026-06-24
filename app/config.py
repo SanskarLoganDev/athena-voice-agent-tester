@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     twilio_auth_token: str = ""
     twilio_phone_number: str = ""
     target_phone_number: str = ASSESSMENT_NUMBER
-    max_call_seconds: int = Field(default=120, ge=30, le=300)
+    max_call_seconds: int = Field(default=300, ge=30, le=1000)
 
     # Public URL (set to your ngrok HTTPS URL)
     public_base_url: str = ""

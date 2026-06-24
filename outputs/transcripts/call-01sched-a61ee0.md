@@ -73,4 +73,4 @@
 - Recording download triggered correctly from `recording_status` callback. ✅
 - Claude response latency improved to 2-6 seconds per turn vs 23 seconds in prior call. ✅
 - Preamble filter correctly skipped only the recording disclaimer. ✅
-- **Call was cut at 120-second limit mid-conversation. Increase MAX_CALL_SECONDS to 240/300 before next call.**
+- **Call was cut at 120-second limit mid-conversation. Increase MAX_CALL_SECONDS to 600 before next call.**

@@ -53,7 +53,7 @@ TWILIO_PHONE_NUMBER=+1xxxxxxxxxx       # your purchased Twilio number
 TARGET_PHONE_NUMBER=+18054398008       # do not change this
 PUBLIC_BASE_URL=https://your-domain.ngrok-free.dev
 RESPONSE_DELAY_MS=500
-MAX_CALL_SECONDS=300
+MAX_CALL_SECONDS=600
 ```
 
 ### 3. Start the API server
@@ -100,6 +100,11 @@ python run.py call --scenario 01_schedule_basic --execute
 | `08_interruptions` | Barge-in and mid-sentence topic switch |
 | `09_conflicting_information` | Conflicting date of birth — identity verification |
 | `10_high_risk_edge_case` | Urgent same-day request and distressed patient |
+| `11_family_member` | Third-party caller claiming to be the patient's brother |
+| `12_multi_intent` | Three requests in one call: reschedule, two refills, insurance update |
+| `13_hard_of_hearing` | Hard-of-hearing patient requesting slow speech and written confirmation |
+| `14_clinical_question` | Patient asks a clinical medication question Athena should not answer |
+| `15_past_appointment` | Patient asks to confirm an appointment that already passed |
 
 ## Outputs
 
@@ -130,4 +135,4 @@ See `docs/architecture.md` for a full explanation of how the system works and th
 
 ## Bug Report
 
-See `docs/bug_report.md` for a consolidated report of all bugs found across the 10+ test calls.
+See `docs/bug_report.md` for a consolidated report of all bugs found across the 15 test calls.

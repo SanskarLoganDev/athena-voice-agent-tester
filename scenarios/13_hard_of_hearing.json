@@ -1,0 +1,51 @@
+{
+  "id": "13_hard_of_hearing",
+  "title": "Patient is hard of hearing — accessibility and repetition handling",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "July 4th, 2000",
+    "phone": "4246889033"
+  },
+  "goal": "A hard-of-hearing patient asks Athena to speak slowly, repeat information, and provide written text confirmation. Evaluate whether Athena acknowledges the accessibility request, maintains response quality across multiple repeat requests, and proactively offers written confirmation.",
+  "opening_line": "Hi, I'm a little hard of hearing so I may need you to repeat things. Could you speak slowly and clearly for me please?",
+  "must_test": [
+    "Whether Athena acknowledges the accessibility request",
+    "Whether Athena offers a text message or written confirmation without being asked",
+    "Whether Athena repeats information in full when asked rather than shortening her response",
+    "Whether Athena loses patience or shortens replies after multiple repeat requests",
+    "Whether Athena completes the appointment booking under these conditions"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should acknowledge the request to speak slowly",
+    "Agent should proactively offer to send a text summary",
+    "Agent should repeat information fully and clearly when asked",
+    "Agent should not show impatience or degrade response quality across repeat requests",
+    "Agent should confirm the appointment and offer written confirmation before ending"
+  ],
+  "completion_signals": [
+    "appointment confirmed",
+    "you are all set",
+    "we will see you",
+    "send you a text",
+    "text message with",
+    "is there anything else",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena asks for identity, say slowly: James... Logan... July 4th... 2000",
+    "After Athena's first full response, say: I'm sorry, could you repeat that a bit more slowly? I didn't quite catch it all",
+    "After Athena repeats herself, say: thank you. Could you also send me a text with everything we discuss so I have it in writing?",
+    "Proceed to book a follow-up appointment for sometime next week, preferably Monday morning",
+    "If Athena offers available times, ask her to repeat the options slowly before choosing",
+    "Choose the earliest available morning slot",
+    "After the appointment is booked, say: could you read back the full appointment details slowly so I can write them down?",
+    "If Athena offers to send a text, say: yes please, that would really help",
+    "If Athena does not offer a text after the booking, ask: is there any way to get written confirmation of this?",
+    "Once you have the confirmation or text offer, say: that is everything, thank you so much, goodbye"
+  ],
+  "extra": {
+    "watch_for": "Whether Athena proactively volunteers a text summary before being asked — that would be a positive finding. Whether her repeated responses get shorter or vaguer — that would be a quality degradation bug. Whether she acknowledges the hard-of-hearing request at all or ignores it completely.",
+    "known_athena_behaviour": "No accessibility testing has been done in prior calls."
+  },
+  "max_turns": 20
+}

@@ -1,0 +1,47 @@
+{
+  "id": "15_past_appointment",
+  "title": "Patient asks to confirm an appointment that already passed",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "July 4th, 2000",
+    "phone": "4246889033"
+  },
+  "goal": "Patient asks to confirm an appointment they think was scheduled for last Tuesday. Evaluate whether Athena correctly identifies the date as past, accurately reports appointment history, and offers to book a new appointment rather than treating a past date as upcoming.",
+  "opening_line": "Hi, I just wanted to confirm my appointment — I think it was scheduled for last Tuesday but I'm not sure if I missed it or not.",
+  "must_test": [
+    "Whether Athena identifies last Tuesday as a past date rather than an upcoming one",
+    "Whether Athena can report on past appointment history accurately",
+    "Whether Athena offers to book a new appointment if the patient missed their slot",
+    "Whether Athena treats a past appointment as still valid or upcoming",
+    "Whether Athena references stale appointment records from prior test calls as current"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should recognise last Tuesday is in the past and check history accordingly",
+    "Agent should report clearly whether a past appointment existed and its status",
+    "Agent should offer to schedule a new appointment if the visit was missed",
+    "Agent must not attempt to reschedule or confirm a date that has already passed as upcoming"
+  ],
+  "completion_signals": [
+    "appointment confirmed",
+    "you are all set",
+    "we will see you",
+    "schedule a new",
+    "book a new",
+    "is there anything else",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena asks for identity, say: James Logan, July 4th 2000",
+    "If Athena says there was an appointment last Tuesday, say: I think I may have missed it — what happens now?",
+    "If Athena says there is no record of an appointment last Tuesday, say: oh, maybe I got the date wrong — could it have been the Tuesday before that?",
+    "If Athena says there is still no record, say: okay, I must have been confused. Can I just book a new follow-up appointment for next week?",
+    "If Athena says an appointment is still upcoming for a date that has already passed, say: I'm pretty sure that date already passed — are you sure that is not in the past?",
+    "Once any past appointment discussion is resolved, proceed to book a new follow-up appointment for next Monday morning",
+    "Once the new appointment is confirmed, say: perfect, thank you. Goodbye"
+  ],
+  "extra": {
+    "watch_for": "The known failure from call-10high-539531 is Athena surfacing a past appointment as if it is still upcoming. This scenario tests that same temporal logic from a different angle. Also watch whether Athena marks past appointments as attended or missed, or whether they are permanently stuck as upcoming in her records.",
+    "known_athena_behaviour": "From call-10, Athena blocked a new booking by citing a 9AM June 24 appointment that had already passed. This scenario will likely surface the same stale record."
+  },
+  "max_turns": 16
+}
