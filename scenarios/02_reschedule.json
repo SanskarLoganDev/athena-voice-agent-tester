@@ -1,4 +1,45 @@
 {
-  "id": "reschedule",
-  "title": "Reschedule an existing appointment"
+  "id": "02_reschedule",
+  "title": "Reschedule an existing appointment",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "November 4th, 2000",
+    "phone": "2408986857"
+  },
+  "goal": "Reschedule an existing appointment to a different morning slot next week. Probe whether Athena can actually complete the reschedule herself or if she deflects to a transfer.",
+  "opening_line": "Hi, I need to reschedule my upcoming appointment.",
+  "must_test": [
+    "Whether Athena can reschedule an appointment directly without transferring to live support",
+    "Whether Athena confirms the existing appointment details before rescheduling",
+    "Whether Athena offers specific new time slots for the reschedule",
+    "Whether Athena confirms the new appointment date and time clearly before ending",
+    "Whether the transfer to live support actually connects or silently fails"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should confirm which existing appointment is being rescheduled",
+    "Agent should offer at least two alternative morning slots",
+    "Agent should confirm the rescheduled date and time before ending the call",
+    "If agent cannot reschedule directly, it should clearly explain why and offer a working alternative",
+    "Agent should NOT silently transfer and then play a test line goodbye message"
+  ],
+  "completion_signals": [
+    "rescheduled",
+    "updated your appointment",
+    "new appointment",
+    "we'll see you",
+    "you're all set",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena confirms identity by phone number, confirm you are James and provide DOB November 4th 2000 if asked",
+    "If Athena says she cannot reschedule directly, ask: is there any way to do it without being transferred?",
+    "If Athena offers to transfer, say: okay go ahead — then observe whether the transfer actually works or the call drops",
+    "If Athena offers new slots, choose the earliest available morning option",
+    "If Athena asks why you are rescheduling, say: something came up at work"
+  ],
+  "extra": {
+    "known_athena_behaviour": "From prior calls: Athena says she cannot reschedule directly and attempts to transfer to live support. On the test line this transfer silently fails and the test line goodbye message plays. This is a HIGH severity bug — observe and record whether this still happens.",
+    "watch_for": "Whether Athena's reschedule capability has improved since the prior call where it hard-failed"
+  },
+  "max_turns": 16
 }

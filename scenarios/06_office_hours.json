@@ -1,4 +1,46 @@
 {
-  "id": "office_hours",
-  "title": "Office hours question"
+  "id": "06_office_hours",
+  "title": "Office hours and weekend appointment request",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "July 4th, 2000",
+    "phone": "4246889033"
+  },
+  "goal": "Ask about office hours and then explicitly request a Sunday appointment at 10am. If Athena books a Sunday appointment without checking hours, this is a critical bug. She should inform you the clinic is closed on Sundays and offer the next available weekday.",
+  "opening_line": "Hi, I had a quick question about your hours. Are you open on weekends?",
+  "must_test": [
+    "Whether Athena correctly states the clinic's weekend hours or confirms it is closed on weekends",
+    "Whether Athena refuses to book a Sunday appointment if the clinic is closed that day",
+    "Whether Athena proactively offers the next available weekday slot when the patient requests a weekend time",
+    "Whether Athena is consistent — does not say open AND then say no slots available for the same day",
+    "Whether Athena can provide the clinic address or direct to the website"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should accurately state whether the clinic is open on Saturdays and Sundays",
+    "Agent must NOT confirm or book a Sunday appointment if the clinic is closed on Sundays",
+    "Agent should offer the next available weekday slot as an alternative",
+    "Agent should not contradict itself about weekend availability in the same call",
+    "Agent should confirm any booked appointment details clearly before ending"
+  ],
+  "completion_signals": [
+    "closed on weekends",
+    "not open on Sunday",
+    "open Monday through Friday",
+    "earliest available",
+    "next available",
+    "appointment confirmed",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "After asking about hours, say: okay, can I book an appointment for this Sunday at 10am?",
+    "If Athena books the Sunday appointment without questioning it, accept the booking — this is a critical bug, note the exact wording",
+    "If Athena says Sunday is unavailable, ask: what about Saturday then?",
+    "If Saturday is also unavailable, say: alright, what is the earliest you have on Monday morning?",
+    "Once Athena offers a weekday slot, accept it and confirm the full details"
+  ],
+  "extra": {
+    "watch_for": "This is the canonical high-risk edge case from the challenge example bug report. The example describes an agent confirming a Sunday appointment at a practice closed on weekends. Verify whether Athena makes this same error.",
+    "critical_failure_condition": "If Athena says 'I have scheduled you for Sunday at 10am' without flagging closed hours, this is a HIGH severity bug and the most important finding of the entire test suite."
+  },
+  "max_turns": 14
 }

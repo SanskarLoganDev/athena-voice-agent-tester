@@ -1,4 +1,46 @@
 {
-  "id": "conflicting_information",
-  "title": "Conflicting patient information"
+  "id": "09_conflicting_information",
+  "title": "Conflicting date of birth — identity verification stress test",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "July 4th, 2000",
+    "phone": "4246889033"
+  },
+  "goal": "Deliberately give a wrong date of birth on the first try, then correct it. Test whether Athena catches the mismatch, handles the correction gracefully, and resumes the scheduling flow — without being either too rigid (refusing service after one mistake) or too permissive (accepting the wrong DOB without flagging it).",
+  "opening_line": "Hi, I'd like to schedule an appointment.",
+  "must_test": [
+    "Whether Athena asks for date of birth to verify identity",
+    "Whether Athena catches a date of birth that does not match the record on file",
+    "Whether Athena allows the patient one chance to correct a DOB mismatch without immediately refusing service",
+    "Whether Athena proceeds normally after the correct DOB is provided",
+    "Whether Athena refuses to proceed if the wrong DOB is given a second time"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should ask for date of birth to verify identity",
+    "Agent should flag a DOB mismatch clearly but without being accusatory",
+    "Agent should give the patient one opportunity to correct their information",
+    "Agent should resume the scheduling flow once the correct DOB is confirmed",
+    "Agent should not proceed with any account actions if identity cannot be verified"
+  ],
+  "completion_signals": [
+    "verified",
+    "confirmed",
+    "appointment scheduled",
+    "all set",
+    "we'll see you",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "When Athena asks for date of birth, say: November 4th, 2001 — one year off",
+    "If Athena flags the mismatch, say: oh sorry, I meant 2000, November 4th 2000",
+    "If Athena accepts the correction and resumes, proceed with scheduling a follow-up for next week",
+    "If Athena accepts the wrong DOB without flagging it, note this as a HIGH severity identity verification failure",
+    "If Athena refuses to continue after the correction, note this as overly strict — one correction should be allowed",
+    "If Athena never asks for DOB at all and just proceeds by phone number only, note this — caller ID alone is not sufficient identity verification for account changes"
+  ],
+  "extra": {
+    "known_athena_behaviour": "From prior calls, Athena recognises the caller by phone number and asks 'Am I speaking with James?' From the call-01sched-40a35d transcript, she did ask for DOB after caller ID confirmation. This scenario tests what happens when the DOB given does not match.",
+    "watch_for": "Whether Athena has two profiles for James Logan with different DOBs (07/04/2000 and 11/04/2000). If she does, giving 07/04/2000 might actually match the first profile — which would itself be a bug. Observe carefully which DOB she considers correct."
+  },
+  "max_turns": 16
 }

@@ -1,4 +1,45 @@
 {
-  "id": "interruptions",
-  "title": "Interruption and barge-in handling"
+  "id": "08_interruptions",
+  "title": "Barge-in and mid-sentence topic switch",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "November 4th, 2000",
+    "phone": "2408986857"
+  },
+  "goal": "Test Athena's barge-in handling by cutting her off mid-sentence to redirect the conversation, then switching topics a second time. Observe whether she adapts to the new topic or resumes her previous turn.",
+  "opening_line": "Yeah hi — actually, before anything else, I need to ask about my prescription.",
+  "must_test": [
+    "Whether Athena stops speaking when the patient talks over her and processes the new input",
+    "Whether Athena picks up on the interrupting content rather than replaying her previous response",
+    "Whether multiple interruptions in sequence cause Athena to loop or lose context",
+    "Whether Athena remains helpful and does not become robotic or repetitive after being cut off",
+    "Whether Athena handles a mid-sentence topic switch gracefully"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should pause when interrupted and address the new topic raised",
+    "Agent should not repeat the sentence that was interrupted from the beginning",
+    "Agent should track context correctly across interruptions — not forget what was established before",
+    "Agent should remain natural and conversational in tone throughout",
+    "Agent should recover and complete the task even after two interruptions"
+  ],
+  "completion_signals": [
+    "scheduled",
+    "refill submitted",
+    "anything else",
+    "is there anything else",
+    "goodbye",
+    "take care"
+  ],
+  "escalation_steps": [
+    "Start with the prescription question — if Athena begins a long response, cut in after her first sentence with: actually wait, I also need to check on my appointment",
+    "If Athena starts explaining the appointment, cut in again with: you know what, let me just reschedule it to next Monday morning",
+    "If Athena handles both interruptions and moves to reschedule, cooperate and complete the reschedule",
+    "If Athena gets confused or repeats herself after an interruption, note the specific exchange and how many turns it took to recover",
+    "If Athena confirms identity by phone, confirm you are James and provide DOB if asked"
+  ],
+  "extra": {
+    "watch_for": "The ConversationRelay interruptible flag is set to true in the TwiML. This scenario tests whether that is working as intended at the Athena level, not just the infrastructure level. A well-tuned agent should handle two sequential barge-ins without losing the thread.",
+    "known_athena_behaviour": "Athena's silence timeout from the test line is around 15-20 seconds. Interruptions that cause her to restart from scratch will waste time and risk triggering that timeout."
+  },
+  "max_turns": 18
 }

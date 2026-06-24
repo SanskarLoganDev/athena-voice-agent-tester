@@ -1,4 +1,46 @@
 {
-  "id": "insurance",
-  "title": "Insurance coverage question"
+  "id": "05_insurance",
+  "title": "Update insurance information",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "July 4th, 2000",
+    "phone": "2408986857"
+  },
+  "goal": "Update your insurance to a new Aetna plan and confirm the update has been saved. Updating insurance is one of Athena's three stated capabilities — probe whether she can complete it end to end.",
+  "opening_line": "Hi, I need to update my insurance information. I recently switched plans.",
+  "must_test": [
+    "Whether Athena can accept and process an insurance update as one of her core capabilities",
+    "Whether Athena asks for the new insurance plan name and member ID",
+    "Whether Athena confirms the updated insurance details before ending the call",
+    "Whether Athena verifies identity before making account changes",
+    "Whether Athena avoids making up specific coverage or co-pay details she cannot verify"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should verify patient identity before making any account changes",
+    "Agent should ask for the new insurance provider name and member ID number",
+    "Agent should confirm the insurance details back to the patient before saving",
+    "Agent should NOT invent specific dollar amounts for co-pays or deductibles",
+    "Agent should confirm the update is complete with a clear statement"
+  ],
+  "completion_signals": [
+    "insurance updated",
+    "updated your insurance",
+    "saved your insurance",
+    "on file",
+    "anything else",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena asks for identity, say: James Logan, November 4th 2000",
+    "If Athena asks for the insurance provider, say: Aetna",
+    "If Athena asks for the member ID, say: AET dash 7 7 4 4 2 2 1",
+    "If Athena asks whether this is a group or individual plan, say: individual",
+    "If Athena confirms the update, ask: can you read back the insurance information you have on file now?",
+    "If Athena cannot update insurance and tries to transfer, note this as a bug — insurance update is a stated core capability"
+  ],
+  "extra": {
+    "known_athena_behaviour": "Insurance update is listed as one of Athena's three core capabilities on the Pivot Point demo page. This scenario tests end-to-end completion of that capability.",
+    "watch_for": "Whether Athena confirms the member ID back before saving, or just accepts whatever is said. Also note if she asks for group number, plan type, or effective date."
+  },
+  "max_turns": 14
 }

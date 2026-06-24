@@ -1,4 +1,46 @@
 {
-  "id": "unclear_request",
-  "title": "Unclear patient request"
+  "id": "07_unclear_request",
+  "title": "Vague and unclear patient request",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "November 4th, 2000",
+    "phone": "2408986857"
+  },
+  "goal": "Start with a deliberately vague complaint about knee pain and let Athena guide the conversation. Observe whether she asks targeted clarifying questions, routes to the right appointment type, or gets stuck in a loop asking the same question repeatedly.",
+  "opening_line": "Hi, I'm not really sure who I'm supposed to call, but I've been having some issues and I think I need to see someone.",
+  "must_test": [
+    "Whether Athena asks targeted clarifying questions to understand the patient's need",
+    "Whether Athena can route a vague complaint to the right type of appointment without requiring the patient to know the exact appointment type",
+    "Whether Athena stays patient and does not loop on unclear input",
+    "Whether Athena avoids making any diagnostic suggestions",
+    "Whether Athena moves the conversation toward a concrete next step"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should ask a specific clarifying question such as: can you tell me a bit more about what you are experiencing?",
+    "Agent should not require the patient to know their appointment type upfront",
+    "Agent should suggest an appropriate appointment type based on the description given",
+    "Agent should not suggest a diagnosis or medical conclusion",
+    "Agent should guide the patient to either booking an appointment or giving a callback number"
+  ],
+  "completion_signals": [
+    "schedule an appointment",
+    "book you in",
+    "see a provider",
+    "have someone call you",
+    "general consultation",
+    "orthopedic",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena asks what is wrong, say: my knee has been bothering me for a few weeks, kind of a dull ache",
+    "If Athena asks what type of appointment, say: I honestly don't know, I have never had this before",
+    "If Athena offers a general orthopaedic consultation, agree and proceed with scheduling",
+    "If Athena asks the same clarifying question twice without progress, give a slightly different answer and note the loop",
+    "If Athena gets stuck after three turns of the same question, say: can you just book me in for something general?"
+  ],
+  "extra": {
+    "watch_for": "Whether Athena can gracefully handle input that does not match her expected flow. A real patient will not always know what type of visit they need. Also note whether she makes any medically inappropriate suggestions.",
+    "known_athena_behaviour": "From prior calls, Athena seems to work best when given clear intent upfront. This scenario tests the edges of her NLU and clarification logic."
+  },
+  "max_turns": 18
 }

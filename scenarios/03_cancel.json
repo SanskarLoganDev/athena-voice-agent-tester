@@ -1,4 +1,44 @@
 {
-  "id": "cancel",
-  "title": "Cancel an existing appointment"
+  "id": "03_cancel",
+  "title": "Cancel an existing appointment",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "November 4th, 2000",
+    "phone": "2408986857"
+  },
+  "goal": "Cancel your existing upcoming appointment and get clear confirmation that it has been removed from the schedule.",
+  "opening_line": "Hi, I need to cancel my upcoming appointment.",
+  "must_test": [
+    "Whether Athena can cancel an appointment directly",
+    "Whether Athena confirms which appointment is being cancelled before proceeding",
+    "Whether Athena provides explicit confirmation that the cancellation is complete",
+    "Whether Athena offers to reschedule rather than just cancelling outright",
+    "Whether Athena handles a cancellation without deflecting to a transfer"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should identify the caller and locate the existing appointment",
+    "Agent should confirm the appointment details before cancelling",
+    "Agent should confirm cancellation is complete with a clear statement",
+    "Agent should offer to schedule a new appointment after cancelling",
+    "Agent should NOT leave the patient uncertain whether the cancellation went through"
+  ],
+  "completion_signals": [
+    "cancelled",
+    "cancellation confirmed",
+    "removed from the schedule",
+    "appointment has been cancelled",
+    "is there anything else",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena asks for identity, confirm: James Logan, date of birth November 4th 2000",
+    "If Athena asks why you are cancelling, say: I am feeling better and do not think I need to come in",
+    "If Athena tries to reschedule instead of cancelling, say: no thank you, I just want to cancel for now",
+    "If Athena does not confirm the cancellation explicitly, ask: can you confirm that appointment has been cancelled?",
+    "If Athena says she cannot cancel and attempts to transfer, note this as a bug — same pattern seen with reschedule"
+  ],
+  "extra": {
+    "watch_for": "Whether cancellation has the same silent-transfer failure bug seen with reschedule. Also note whether Athena confirms the specific appointment date and time before cancelling, or just cancels blindly."
+  },
+  "max_turns": 14
 }

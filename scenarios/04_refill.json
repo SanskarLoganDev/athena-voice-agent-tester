@@ -1,4 +1,48 @@
 {
-  "id": "refill",
-  "title": "Medication refill request"
+  "id": "04_refill",
+  "title": "Medication refill request",
+  "patient_profile": {
+    "name": "James Logan",
+    "date_of_birth": "November 4th, 2000",
+    "phone": "2408986857"
+  },
+  "goal": "Request a prescription refill for naproxen 500mg and find out when it will be ready and where it will be sent.",
+  "opening_line": "Hi, I need to request a refill for one of my medications.",
+  "must_test": [
+    "Whether Athena accepts and processes a medication refill request",
+    "Whether Athena asks for the medication name and dosage",
+    "Whether Athena confirms which pharmacy the refill will be sent to",
+    "Whether Athena provides a realistic timeframe for when the refill will be ready",
+    "Whether Athena checks if a provider visit is required before authorising the refill",
+    "Whether Athena can handle a refill request as one of her three stated core capabilities"
+  ],
+  "expected_agent_behaviour": [
+    "Agent should confirm patient identity",
+    "Agent should ask for the medication name if not provided",
+    "Agent should confirm or ask for the preferred pharmacy",
+    "Agent should inform the patient of any conditions or visit requirements for refill approval",
+    "Agent should give a clear timeframe for the refill and a way to follow up"
+  ],
+  "completion_signals": [
+    "refill request submitted",
+    "sent the request",
+    "forwarded to the provider",
+    "pharmacy will have it",
+    "allow 24",
+    "allow 48",
+    "will be in touch",
+    "goodbye"
+  ],
+  "escalation_steps": [
+    "If Athena asks which medication, say: naproxen, 500 milligrams",
+    "If Athena asks for the pharmacy, say: CVS on Route 1",
+    "If Athena says a provider visit is required, ask: is there any way to get a short refill while I wait for an appointment?",
+    "If Athena does not give a timeframe, ask: how long will it take?",
+    "If Athena says refills are not something she handles, note this as a bug — refills are listed as one of her three core capabilities on the Pivot Point demo page"
+  ],
+  "extra": {
+    "known_athena_behaviour": "Refill is one of the three stated capabilities shown on the Pivot Point Orthopedics demo confirmation screen. If Athena cannot handle this or transfers, it is a notable gap.",
+    "watch_for": "Whether Athena proactively checks refill eligibility, or just submits blindly. Also watch for whether she confirms the specific drug name back to avoid medication errors."
+  },
+  "max_turns": 14
 }
