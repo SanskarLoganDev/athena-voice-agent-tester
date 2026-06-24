@@ -223,4 +223,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 
-/outputs
+# Call outputs — selectively committed
+# Metadata JSONL files contain real Twilio Account SIDs in callback payloads
+# and must never be committed. Transcripts, recordings, and bug reports are safe.
+outputs/metadata/

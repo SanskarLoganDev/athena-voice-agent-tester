@@ -103,14 +103,14 @@ python run.py call --scenario 01_schedule_basic --execute
 
 ## Outputs
 
-All outputs are written to `outputs/` (excluded from git):
+All outputs are written to `outputs/` locally. Transcripts and recordings are committed to this repository so reviewers can evaluate call quality directly. Metadata and bug report files are excluded from git because the raw Twilio event payloads embedded in the metadata JSONL files contain the account SID from Twilio's status callbacks — committing them would trigger GitHub's secret scanning push protection.
 
-| Directory | Contents |
-|-----------|----------|
-| `outputs/metadata/` | JSON Lines event log for each call (TwiML, WebSocket events, status callbacks) |
-| `outputs/transcripts/` | Human-readable transcript with automated bug analysis |
-| `outputs/recordings/` | MP3 dual-channel recording of each call |
-| `outputs/bug_reports/` | Per-call bug report extracted from transcript analysis |
+| Directory | Contents | Committed |
+|-----------|----------|-----------|
+| `outputs/transcripts/` | Human-readable markdown transcript with bug analysis | ✅ Yes |
+| `outputs/recordings/` | MP3 dual-channel recording of each call | ✅ Yes |
+| `outputs/bug_reports/` | Per-call bug report markdown files | ✅ Yes |
+| `outputs/metadata/` | JSON Lines event log (contains Twilio Account SID) | ❌ No |
 
 ## Running Tests
 
