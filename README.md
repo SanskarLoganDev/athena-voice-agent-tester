@@ -129,6 +129,14 @@ pytest -q
 Invoke-RestMethod http://localhost:8000/health
 ```
 
+## Videos
+
+**Walkthrough — [Building a Voice Bot to Find Athena Bugs](https://www.loom.com/share/61709222a66e46f9818fe70cb82b1c2b)**
+A 5-minute overview of the system architecture, key design decisions, the iteration process, and the most significant bugs found across 15 calls. Also available locally as `loom_demo_sv.mp4`.
+
+**AI-Assisted Debugging — `AI debugging.mp4`**
+A screen recording of an iterative debugging session using Claude Code in VS Code, fixing a real bug found during development: a case-sensitive key lookup that silenced the bot entirely.
+
 ## Architecture
 
 See `docs/architecture.md` for a full explanation of how the system works and the key design decisions.
